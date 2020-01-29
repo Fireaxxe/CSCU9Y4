@@ -1,0 +1,5 @@
+#List.map ;;
+
+#let square x = string_of_int (x*x) ;;
+
+#List.map square [2; 3; 4;] ;;

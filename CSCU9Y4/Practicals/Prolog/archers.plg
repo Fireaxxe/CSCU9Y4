@@ -1,0 +1,115 @@
+father(dan,phil).
+father(dan,jack).
+father(dan,christine).
+father(phil,kenton).
+father(phil,shula).
+father(phil,david).
+father(phil,elizabeth).
+father(jack,lillian).
+father(jack,tony).
+father(jack,jenny).
+father(tony,tommy).
+father(tony,helen).
+father(tony,john).
+father(roger,adam).
+father(roger,debbie).
+father(brian,kate).
+father(david,pip).
+father(david,josh).
+father(mark,daniel).
+
+
+mother(doris,phil).
+mother(doris,jack).
+mother(doris,christine).
+mother(jill,kenton).
+mother(jill,shula).
+mother(jill,david).
+mother(jill,elizabeth).
+mother(peggy,lillian).
+mother(peggy,tony).
+mother(peggy,jenny).
+mother(pat,tommy).
+mother(pat,helen).
+mother(pat,john).
+mother(jenny,adam).
+mother(jenny,debbie).
+mother(jenny,kate).
+mother(ruth,pip).
+mother(ruth,josh).
+mother(shula,daniel).
+
+male(dan).
+male(phil).
+male(jack).
+male(kenton).
+male(david).
+male(tony).
+male(brian).
+male(roger).
+male(mark).
+male(john).
+male(tommy).
+male(adam).
+male(daniel).
+male(josh).
+
+female(doris).
+female(jill).
+female(peggy).
+female(christine).
+female(shula).
+female(ruth).
+female(elizabeth).
+female(lillian).
+female(pat).
+female(jenny).
+female(helen).
+female(debbie).
+female(kate).
+female(pip).
+
+dead(dan).
+dead(doris).
+dead(jack).
+dead(mark).
+dead(john).
+dead(fred).
+
+
+parent(X,Y) :-
+		father(X,Y); mother(X,Y).
+
+grandfather(X,Y) :-
+		father(X,Z), mother(Z,Y).
+grandfather(X,Y) :-
+		father(X,Z), father(Z,Y).
+		
+
+
+brother(B,S) :-	male(B), father(F,B), father(F,S), B \== S.
+brother(B,S) :- male(B), mother(M,B), mother(M,S), B \== S.
+
+granddaughter(V,W) :- female(V), parent(W,Z), parent(Z,V), write(V), write(' is the granddaughter of '), write(W).		
+		
+write_children(X) :- parent(X,Y),
+					 write(Y), nl,
+					 fail.
+write_children(X) :- write( 'End of list' ), nl.
+
+write_siblings(X) :- parent(Z,X), parent(Z,Y), X \= Y, write(X), write(' is sibling with '), write(Y), nl, fail. 
+write_siblings(X) :- write( 'End of list' ), nl.
+
+		
+ancestor(X,Y) :- parent(X,Y).
+ancestor(X,Y) :- parent(X,Z), ancestor(Z,Y).
+
+descendant(X, Y) :- parent(Y, X).
+descendant(X, Y) :- parent(Y, Z), descendant(X, Z).
+
+grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+descendent(X, Y) :- grandparent(Y, X).
+
+
+archer(dan).
+archer(X) :- father(P,X), archer(P).

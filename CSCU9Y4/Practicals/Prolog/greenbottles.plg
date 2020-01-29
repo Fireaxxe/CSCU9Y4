@@ -1,0 +1,94 @@
+/* The following program contains several errors.  It is
+intended to cause a poem to be written out on the screen,
+when the goal  ?- greenBottles.  is given.  The intended
+output is listed at the end of this file.  Try to correct
+all of the errors, and run the program. */
+
+greenBottles :-	
+		greenBottles(10).
+
+greenBottles(Count) :-
+		firstLine(Count), nl,
+		firstLine(count), nl,
+		midLine, nl,
+		NewCount is Count - 1,
+		lastLine(NewCount), nl, nl
+		greenBottles(NewCount).
+greenBottles(0).
+
+firstLine(C) :- 
+		bottles(C), rest.
+
+bottles(1) :-
+		write('1 green bottle, ').
+bottles(N) :-
+		N > 1, write(N),
+		write(' green bottles, ').
+
+rest :-
+		write('hanging on the wall')
+
+mid_line :-
+		write('And if one green bottle '),
+		write('should accidentally fall').
+
+lastLine(C) :-
+	 	write('There'd be '),
+		bottles(C), rest, write('.').
+
+/*=================================================*/
+
+/*
+Now here is the output which should be produced by 
+the program:
+
+10 green bottles, hanging on the wall
+10 green bottles, hanging on the wall
+And if one green bottle should accidentally fall
+There'd be 9 green bottles, hanging on the wall.
+
+9 green bottles, hanging on the wall
+9 green bottles, hanging on the wall
+And if one green bottle should accidentally fall
+There'd be 8 green bottles, hanging on the wall.
+
+8 green bottles, hanging on the wall
+8 green bottles, hanging on the wall
+And if one green bottle should accidentally fall
+There'd be 7 green bottles, hanging on the wall.
+
+7 green bottles, hanging on the wall
+7 green bottles, hanging on the wall
+And if one green bottle should accidentally fall
+There'd be 6 green bottles, hanging on the wall.
+
+6 green bottles, hanging on the wall
+6 green bottles, hanging on the wall
+And if one green bottle should accidentally fall
+There'd be 5 green bottles, hanging on the wall.
+
+5 green bottles, hanging on the wall
+5 green bottles, hanging on the wall
+And if one green bottle should accidentally fall
+There'd be 4 green bottles, hanging on the wall.
+
+4 green bottles, hanging on the wall
+4 green bottles, hanging on the wall
+And if one green bottle should accidentally fall
+There'd be 3 green bottles, hanging on the wall.
+
+3 green bottles, hanging on the wall
+3 green bottles, hanging on the wall
+And if one green bottle should accidentally fall
+There'd be 2 green bottles, hanging on the wall.
+
+2 green bottles, hanging on the wall
+2 green bottles, hanging on the wall
+And if one green bottle should accidentally fall
+There'd be 1 green bottle, hanging on the wall.
+
+1 green bottle, hanging on the wall
+1 green bottle, hanging on the wall
+And if one green bottle should accidentally fall
+There'd be no green bottles, hanging on the wall.
+*/

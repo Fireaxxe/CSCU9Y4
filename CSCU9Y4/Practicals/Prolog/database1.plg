@@ -1,0 +1,14 @@
+old(jane).
+old(fred).
+
+young(emily).
+
+old(john).
+old(anne).
+young(bill).
+wiser(X,Y) :- old(X), young(Y).
+
+dark_haired(john).
+grey_haired(jane).
+dark_haired(bill).
+wiser(X,Y) :- grey_haird(X), dark_haired(Y).

@@ -1,0 +1,41 @@
+/*
+To write out a number of verses of the
+'Ten men went to mow' poem.
+The top level goal could be, for example
+?- poem(10).
+
+Try making this run.  Then try to understand
+how it works by following through on paper
+(say) what happens (the sequence of calls
+to predicates) when the goals ?- poem(1).
+and  ?- poem(2). are given.
+*/
+
+poem(MaxMen) :-	verses(0,MaxMen).
+
+verses(MaxMen,MaxMen).
+verses(Count,MaxMen) :-
+		VerseNum is Count + 1,
+		writeVerse(VerseNum),
+		verses(VerseNum,MaxMen).
+
+writeVerse(V) :-
+		write(V), writeWord(V), writeRest, nl,
+		writeBody(V),
+		writeLast, nl, nl.
+
+writeWord(1) :-
+		write(' man ').
+writeWord(V) :-
+		V > 1, write(' men ').
+
+writeRest :-
+		write('went to mow, went to mow a meadow,').
+
+writeBody(1).
+writeBody(V) :-
+		write(V), write(' men,'), nl,
+		NewV is V - 1, writeBody(NewV).
+
+writeLast :-
+		write('1 man and his dog, went to mow a meadow.').

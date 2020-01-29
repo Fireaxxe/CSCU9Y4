@@ -1,0 +1,33 @@
+/* Fragments of Prolog as used in lectures for 31Y4
+/* Recursion */
+
+    stars :- write('*'), nl, stars.
+
+    stars(0) :- nl.
+    stars(N) :- write('*'), nl, M is N-1, stars(M).
+
+    royal(victoria).
+    royal(X) :- parent(P,X), royal(P).
+
+    archer(dan).
+    archer(X) :- father(P,X), archer(P).
+
+    ancestor(X,Y) :- parent(X,Y).
+    ancestor(X,Y) :- parent(X,Z), ancestor(Z,Y).
+
+    parent(X,Y) :- father(X,Y).
+    parent(X,Y) :- mother(X,Y).
+
+    writelist([]).
+    writelist([H|T]) :-
+            write(H), nl,
+            writelist(T).
+
+    sumlist([X],X).
+    sumlist([H|T],S) :-
+            sumlist(T,N),
+            S is H+N.
+
+    duplicate([],[]).
+    duplicate([H|T],[H,H|T1]) :-
+            duplicate(T,T1).    
